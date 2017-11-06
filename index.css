@@ -1,5 +1,5 @@
 .inline{
-    display:inline-block;
+    display:table;
     padding-right: 0.2em;
 }
 
@@ -9,4 +9,21 @@
 
 button{
     width: 12em;
+}
+
+.table{
+    display:table;
+}
+
+.tr{
+    display:table-row;
+}
+
+.td{
+    display:table-cell;
+    padding-right: 0.2em;
+}
+
+.stats{
+    width: 13em;
 }
