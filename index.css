@@ -1,0 +1,12 @@
+.inline{
+    display:inline-block;
+    padding-right: 0.2em;
+}
+
+#resources{
+    padding-bottom: 0.5em;
+}
+
+button{
+    width: 12em;
+}
