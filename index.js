@@ -218,10 +218,16 @@ function onTimerTick() {
         document.getElementById("purchaseAleButton").disabled = true;
     }
 
-    if(ore >= 10){
+    if(ore >= 100){
         document.getElementById("sellIronOreButton").disabled = false;
     }else{
         document.getElementById("sellIronOreButton").disabled = true;
+    }
+
+    if(ironIngots >= 100){
+        document.getElementById("sellIronBarsButton").disabled = false;
+    }else{
+        document.getElementById("sellIronBarsButton").disabled = true;
     }
 }
 
@@ -395,6 +401,7 @@ function onMetallurgistClick(){
     if(numberOfMetallurgists == 1){
         document.getElementById("metallurgistData").style.display = '';
         document.getElementById("ironData").style.display = '';
+        document.getElementById("sellIronBarsButton").style.display = '';
     }
 }
 
@@ -599,6 +606,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("hireMerchantButton").style.display = 'none';
     document.getElementById("purchaseAleButton").style.display = 'none';
     document.getElementById("sellIronOreButton").style.display = 'none';
+    document.getElementById("sellIronBarsButton").style.display = 'none';
+    
 
 
 
@@ -638,6 +647,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("hireMerchantButton").addEventListener("click", onMerchantClick);
     document.getElementById("purchaseAleButton").addEventListener("click", onAleClick);
     document.getElementById("sellIronOreButton").addEventListener("click", function(){
-        sellGood("ore", 10, 0.1)
+        sellGood("ore", 100, 0.1)
+    });
+    document.getElementById("sellIronBarsButton").addEventListener("click", function(){
+        sellGood("ironIngots", 100, 0.3)
     });
 });
