@@ -6,8 +6,6 @@
         <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
-    
-        
         <div id="resources">
             <div id="oreData">Current Iron Ore: <span id="oreNum">0</span> (Currently mining <span id="oreSpeed">0</span> Ore per second)</div>
             <div id="ironData">Current Iron Ingots: <span id="ironIngotNum">0</span> (Currently smelting <span id="ironIngotSpeed">0</span> Ingots per second)</div>
@@ -17,12 +15,12 @@
                     (Currently gaining <span id="goldIngotSpeed">0</span> Ingots per second; 
                     <span id="smeltingGoldSpeed">0</span> from smelting, <span id="merchantGoldSpeed">0</span> from taxes)
             </div>
-            <!--<div id="debtData">Debt to Goblin Cartel: <span id="debtNum">20000</span> (Interest Rate: 0.0001% per second)</div>-->
             <div id="stoneData">Current Stone: <span id="stoneNum">0</span> (Currently mining <span id="stoneSpeed">0</span> Stone per second)</div>
             <div id="coalData">Current Coal: <span id="coalNum">0</span> (Currently mining <span id="coalSpeed">0</span> Coal per second)</div>
             <div id="researchData">Currently researching at a rate of <span id="researchSpeed">0</span> per second</div>
             <div id="popData">Current Population: <span id="popNum">0 / 0</span></div>
-            <div id="aleData">Current Ale Supply: <span id="aleNum">0</span></div>
+            <div id="aleData">Current Ale Supply: <span id="aleNum">0</span> (Currently brewing <span id="aleProdSpeed">0</span> Ale per second)</div>
+            <div id="grainData">Current Grain Supply: <span id="grainNum">0</span> (Currently farming <span id="grainProdSpeed">0</span> Grain per second)</div>
         </div>
         <div class="table">
             <div class="tr">
@@ -40,6 +38,7 @@
                         <div id="shedData">Number of drill sheds: <span id="numSheds">0</span></div>
                         <div id="smelteryData">Number of smelteries: <span id="numSmelteries">0</span></div>
                         <div id="traderData">Number of trading posts: <span id="numTraders">0</span></div>
+                        <div id="brewaryData">Number of brewaries: <span id="numBrewaries">0</span></div>
                     </div>
                     <div id="engineeringSector">
                         <b>Engineering</b>
@@ -47,6 +46,7 @@
                     </div>
                     <div id="agricultureSector">
                         <b>Agriculture</b>
+                        <div id="brewsterData">Number of brewsters: <span id="numBrewsters">0 / 0</span></div>
                     </div>
                     <div id="commerceSector">
                         <b>Commerce</b>
@@ -65,6 +65,7 @@
                     <div><button id="buildShedButton" title="We need somewhere to build and store Steam Drills.">Construct Drill Shed <br>(costs <span id="shedCost">3000</span> Stone)</button></div>
                     <div><button id="buildSmelteryButton" title="Time to turn ore into metal.">Construct Smeltery <br>(costs <span id="smelteryCost">2000</span> Stone)</button></div>
                     <div><button id="buildTraderButton" title="Buy goods and set up trade deals.">Construct Trading Post <br>(costs <span id="traderCost">100</span> Stone)</button></div>
+                    <div><button id="buildBrewaryButton" title="We'll make our own ale!">Construct Brewary <br>(costs <span id="brewaryCost">2500</span> Stone)</button></div>
                 </div>
                 <div id="researchControls" class="td">
                     <div><button id="hireEngineerButton" title="Recruit an Engineer to come up with some improvements.">Hire Dwarf Engineer <br>(costs <span id="engineerCost">100</span> Gold)</button></div>
@@ -76,10 +77,12 @@
                     <div><button id="researchDrillButton" title="Ten times the power of a single dwarf!">Steam Drills! <br>(<span id="drillResearchProgress">0</span>/4000)</button></div>
                 </div>
                 <div id="agricultureControls" class="td">
+                    <div><button id="hireBrewsterButton" title="Get that brew brewin'!">Hire Brewster <br>(costs <span id="brewsterCost">75</span> Gold)</button></div>
                 </div>
                 <div id="commerceControls" class="td">
                     <div><button id="hireMerchantButton" title="Get trading, get gold!">Hire Merchant <br>(costs <span id="merchantCost">40</span> Gold)</button></div>
                     <div><button id="purchaseAleButton" title="Mining is thirsty work!">Purchase Ale <br>(costs <span id="aleCost">100</span> Gold)</button></div>
+                    <div><button id="purchaseGrainButton" title="Brewing ale takes grain...">Purchase Grain <br>(costs <span id="grainCost">25</span> Gold)</button></div>
                     <div><button id="sellIronOreButton" title="We need gold.">Sell Iron Ore <br>(100 ore : 10 gold ingot)</div>
                     <div><button id="sellIronBarsButton" title="Iron is useful, but it sells well too!">Sell Iron Bars <br>(100 bars : 30 gold ingots)</div>
                 </div>

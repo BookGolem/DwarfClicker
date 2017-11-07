@@ -31,10 +31,16 @@ var BASESMELTERYCOST = 2000;
 var SMELTERYMULTIPLIER = 1.5;
 var BASETRADERCOST = 100;
 var TRADERMULTIPLIER = 1.3;
+var BASEBREWARYCOST = 2500;
+var BREWARYMULTIPLIER = 1.3;
 
 //Constants - Engineering 
 var BASEENGINEERCOST = 100;
 var ENGINEERMULTIPLIER = 1.1;
+
+//Constants - Agriculture
+var BASEBREWSTERCOST = 75;
+var BREWSTERMULTIPLIER = 1.15
 
 //Limits
 var maxDwarfs = 0;
@@ -42,9 +48,9 @@ var maxEngineers = 0;
 var maxDrills = 0;
 var maxMetallurgists = 0;
 var maxMerchants = 0;
+var maxBrewsters = 0;
 
 //Variables - Resources
-// var debt = 20000;
 var clickOreValue = 1; //The amount by which clicking increases Ore.
 var clickStoneValue = 5; //The amount by which clicking increases Stone.
 var autoOreValue = 0; //100ms / 0.1perTick = 1 per second
@@ -62,6 +68,7 @@ var ironIngots = 0;
 var goldIngots = 20;
 var ale = 0;
 var aleDrinkSpeed = 0.01;
+var grain = 0;
 
 var research = 0;//The amount of Research accumulated for advancements.
 var dwarfs = 0; //The number of dwarfs, across all professions
@@ -110,13 +117,21 @@ var numberOfSmelteries = 0;
 var traderCost = BASETRADERCOST;
 var numberOfTraders = 0;
 
+var brewaryCost = BASEBREWARYCOST;
+var numberOfBrewaries = 0;
+
 //Variables - Engineering 
 var engineerCost = BASEENGINEERCOST; //The cost of hiring a new miner
 var numberOfEngineers = 0; //The number of miners mining
 var engineerResearchSpeed = 0.02;
 
 //Variables - Agriculture
-var aleCost = 10; //Cost for 100 ale. Maybe should be 100?
+var aleCost = 10; //Cost for 100 ale.
+var grainCost = 25; //Cost for 1000 grain. (4 grain = 1 ale)
+var brewsterCost = BASEBREWSTERCOST;
+var numberOfBrewsters = 0;
+var brewingSpeed = 0.1;
+var grainPerAle = 4; 
 
 //Variables - Commerce
 var numberOfMerchants = 0;
@@ -133,8 +148,8 @@ function onTimerTick() {
     document.getElementById("coalNum").innerHTML = parseInt(coal);
     document.getElementById("goldNum").innerHTML = parseInt(goldOre);
     document.getElementById("goldIngotNum").innerHTML = parseInt(goldIngots);
-    // document.getElementById("debtNum").innerHTML = parseInt(debt);
     document.getElementById("aleNum").innerHTML = parseInt(ale);
+    document.getElementById("grainNum").innerHTML = parseInt(grain);
 
     //INDUSTRY
     if(goldIngots >= minerCost && dwarfs < maxDwarfs){
@@ -185,6 +200,12 @@ function onTimerTick() {
         document.getElementById("buildTraderButton").disabled = true;
     }
 
+    if(stone >= brewaryCost){
+        document.getElementById("buildBrewaryButton").disabled = false;
+    }else{
+        document.getElementById("buildBrewaryButton").disabled = true;
+    }
+
     //ENGINEERING
     if(goldIngots >= engineerCost && dwarfs < maxDwarfs && numberOfEngineers < maxEngineers){
         document.getElementById("hireEngineerButton").disabled = false;
@@ -203,6 +224,16 @@ function onTimerTick() {
     }
     if(ore >= BASEMINERCOST){
         document.getElementById("hireMinerButton").style.display = '';
+    }
+    if(dwarfs >= 50){
+        document.getElementById("buildBreweryButton").style.display = '';
+    }
+
+    //AGRICULTURE
+    if(goldIngots >= brewsterCost && dwarfs < maxDwarfs && numberOfBrewsters < maxBrewsters){
+        document.getElementById("hireBrewsterButton").disabled = false;
+    }else{
+        document.getElementById("hireBrewsterButton").disabled = true;
     }
 
     //COMMERCE
@@ -253,6 +284,8 @@ function onAutoTick() {
         coalMultiplier = 0;
     }
     calculateMiningSpeed();
+    calculateBrewingSpeed();
+
 
     //Mining
     ore += autoOreValue;
@@ -269,27 +302,14 @@ function onAutoTick() {
         ore -= ore;
     }
 
-    // if(debt > 0){
-    //     if(secondCount==0){
-    //         debt = debt*1.0001;
-    //     }
-    //     if(goldOre > goldConversionSpeed){
-    //         goldOre -= goldConversionSpeed;
-    //         debt -= goldConversionSpeed;
-    //     }else{
-    //         debt -= goldOre;
-    //         goldOre -= goldOre;
-    //     }
-    // }else{
-        if(goldOre > goldConversionSpeed){
-            goldOre -= goldConversionSpeed;
-            goldIngots += goldConversionSpeed;
-        }else{
-            goldIngots += goldOre;
-            goldOre -= goldOre;
-        }
-        goldIngots += merchantIncome;
-    // }
+    if(goldOre > goldConversionSpeed){
+        goldOre -= goldConversionSpeed;
+        goldIngots += goldConversionSpeed;
+    }else{
+        goldIngots += goldOre;
+        goldOre -= goldOre;
+    }
+    goldIngots += merchantIncome;
 
     //Research
     research += autoResearchValue;
@@ -309,6 +329,7 @@ function onIncreaseClick(){
 
 function calculateIncrements(){
     calculateMiningSpeed();
+    calculateBrewingSpeed();
     
     document.getElementById("numMiners").innerHTML = numberOfMiners;
     document.getElementById("numDrills").innerHTML = numberOfSteamDrills + " / " + maxDrills;
@@ -351,6 +372,23 @@ function calculateMiningSpeed(){
 
     document.getElementById("merchantGoldSpeed").innerHTML = (Math.round(merchantIncome * 100)/10);
     document.getElementById("goldIngotSpeed").innerHTML = (Math.round((goldConversionSpeed + merchantIncome) * 100)/10);
+}
+
+function calculateBrewingSpeed(){
+    var brewingRate = numberOfBrewsters * brewingSpeed;
+
+    if(grain >= brewingRate*grainPerAle){
+        grain -= brewingRate*grainPerAle;
+        ale += brewingRate;
+
+        document.getElementById("aleNum").innerHTML = parseInt(ale);
+        document.getElementById("aleProdSpeed").innerHTML = (Math.round(brewingRate * 100)/10);
+    }else{
+        document.getElementById("aleNum").innerHTML = ale;
+        document.getElementById("aleProdSpeed").innerHTML = 0;
+    }
+
+    
 }
 
 //INDUSTRY
@@ -492,6 +530,25 @@ function onTraderClick(){
     }
 }
 
+function onBrewaryClick(){
+    stone -= brewaryCost;
+    maxBrewsters += 5;
+    numberOfBrewaries++;
+
+    brewaryCost = Math.round(BASEBREWARYCOST * Math.pow(BREWARYMULTIPLIER, numberOfBrewaries));
+    document.getElementById("brewaryCost").innerHTML = parseInt(brewaryCost);
+    document.getElementById("numBrewaries").innerHTML = numberOfBrewaries;
+    document.getElementById("numBrewsters").innerHTML = numberOfBrewsters + " / " + maxBrewsters;
+
+    if(numberOfBrewaries <= 1){
+        document.getElementById("hireBrewsterButton").style.display = '';
+        document.getElementById("brewaryData").style.display = '';
+        document.getElementById("brewsterData").style.display = '';
+        document.getElementById("purchaseGrainButton").style.display = '';
+        document.getElementById("grainData").style.display = '';
+    }
+}
+
 //ENGINEERING
 function onEngineerClick(){    
     goldIngots -= engineerCost;
@@ -520,6 +577,24 @@ function onAleClick(){
     goldIngots -= aleCost;
 
     ale += 100;
+}
+
+function onGrainClick(){
+    goldIngots -= grainCost;
+
+    grain += 1000;
+}
+
+function onBrewsterClick(){
+    goldIngots -= brewsterCost;
+    numberOfBrewsters++;
+    dwarfs++;
+    calculateIncrements();
+
+    brewsterCost = Math.round(BASEBREWSTERCOST * Math.pow(BREWSTERMULTIPLIER, numberOfBrewsters));
+    document.getElementById("brewsterCost").innerHTML = parseInt(brewsterCost);
+    document.getElementById("numBrewsters").innerHTML = numberOfBrewsters + " / " + maxBrewsters;
+
 }
 
 //COMMERCE 
@@ -593,7 +668,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buildShedButton").style.display = 'none';
     document.getElementById("buildSmelteryButton").style.display = 'none';
     document.getElementById("buildTraderButton").style.display = 'none';
-
+    document.getElementById("buildBrewaryButton").style.display = 'none';
     
     document.getElementById("hireEngineerButton").style.display = 'none';
     document.getElementById("researchCoalMiningButton").style.display = 'none';
@@ -608,8 +683,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("sellIronOreButton").style.display = 'none';
     document.getElementById("sellIronBarsButton").style.display = 'none';
     
-
-
+    document.getElementById("hireBrewsterButton").style.display = 'none';
+    document.getElementById("brewaryData").style.display = 'none';
+    document.getElementById("brewsterData").style.display = 'none';
+    document.getElementById("purchaseGrainButton").style.display = 'none';
+    document.getElementById("grainData").style.display = 'none';
 
     //do work
     document.getElementById("mineButton").addEventListener("click", onIncreaseClick);
@@ -623,6 +701,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buildShedButton").addEventListener("click", onShedClick);
     document.getElementById("buildSmelteryButton").addEventListener("click", onSmelteryClick);
     document.getElementById("buildTraderButton").addEventListener("click", onTraderClick);
+    document.getElementById("buildBrewaryButton").addEventListener("click", onBrewaryClick);
 
     document.getElementById("hireEngineerButton").addEventListener("click", onEngineerClick);
     document.getElementById("researchCoalMiningButton").addEventListener("click", function(){
@@ -646,10 +725,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     document.getElementById("hireMerchantButton").addEventListener("click", onMerchantClick);
     document.getElementById("purchaseAleButton").addEventListener("click", onAleClick);
+    document.getElementById("purchaseGrainButton").addEventListener("click", onGrainClick);
     document.getElementById("sellIronOreButton").addEventListener("click", function(){
         sellGood("ore", 100, 0.1)
     });
     document.getElementById("sellIronBarsButton").addEventListener("click", function(){
         sellGood("ironIngots", 100, 0.3)
     });
+
+    document.getElementById("hireBrewsterButton").addEventListener("click", onBrewsterClick);
 });
