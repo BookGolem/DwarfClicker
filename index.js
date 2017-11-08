@@ -14,6 +14,7 @@ setInterval(onAutoTick, 100); // 10 ticks/second
 var BASEMINERCOST = 10;
 var MINERMULTIPLIER = 1.08;
 var BASEDRILLCOST = 1000;
+var BASEDRILLIRONCOST = 500;
 var DRILLMULTIPLIER = 1.12;
 var BASEMETALLURGISTCOST = 50;
 var METALLURGISTMULTIPLIER = 1.1;
@@ -87,6 +88,7 @@ var minerCoalSpeed = 0.01;
 var minerGoldSpeed = 0.005;
 
 var steamDrillCost = BASEDRILLCOST; //The cost of a Steam Drill
+var steamDrillIronCost = BASEDRILLIRONCOST;
 var steamDrillCoalUse = 0.5;  //1 = 10 per second
 var numberOfSteamDrills = 0;
 var drillEfficiencyMultiplier = 1;
@@ -158,7 +160,7 @@ function onTimerTick() {
         document.getElementById("hireMinerButton").disabled = true;
     }
 
-    if(goldIngots >= steamDrillCost && dwarfs < (maxDwarfs-2) && numberOfSteamDrills < maxDrills){
+    if(goldIngots >= steamDrillCost && ironIngots >= steamDrillIronCost && dwarfs < (maxDwarfs-2) && numberOfSteamDrills < maxDrills){
         document.getElementById("hireDrillButton").disabled = false;
     }else{
         document.getElementById("hireDrillButton").disabled = true;
@@ -411,12 +413,14 @@ function onMinerClick(){
 
 function onDrillClick(){    
     goldIngots -= steamDrillCost;
+    ironIngots -= steamDrillIronCost;
 
     numberOfSteamDrills++;
     dwarfs+=3;
     calculateIncrements();
 
     steamDrillCost = Math.round(BASEDRILLCOST * Math.pow(DRILLMULTIPLIER, numberOfSteamDrills));
+    steamDrillIronCost = Math.round(BASEDRILLIRONCOST * Math.pow(DRILLMULTIPLIER, numberOfSteamDrills));
     
     document.getElementById("drillCost").innerHTML = parseInt(steamDrillCost);
     
