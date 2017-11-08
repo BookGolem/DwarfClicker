@@ -32,8 +32,8 @@ var BASESMELTERYCOST = 2000;
 var SMELTERYMULTIPLIER = 1.5;
 var BASETRADERCOST = 100;
 var TRADERMULTIPLIER = 1.3;
-var BASEBREWARYCOST = 2500;
-var BREWARYMULTIPLIER = 1.3;
+var BASEBREWERYCOST = 2500;
+var BREWERYMULTIPLIER = 1.3;
 var BASEFARMCOST = 2000;
 var BASEFARMGRAINCOST = 1500;
 var FARMMULTIPLIER = 1.3;
@@ -125,7 +125,7 @@ var numberOfSmelteries = 0;
 var traderCost = BASETRADERCOST;
 var numberOfTraders = 0;
 
-var brewaryCost = BASEBREWARYCOST;
+var breweryCost = BASEBREWERYCOST;
 var numberOfBrewaries = 0;
 
 var farmCost = BASEFARMCOST;
@@ -217,10 +217,10 @@ function onTimerTick() {
         document.getElementById("buildTraderButton").disabled = true;
     }
 
-    if(stone >= brewaryCost){
-        document.getElementById("buildBrewaryButton").disabled = false;
+    if(stone >= breweryCost){
+        document.getElementById("buildBreweryButton").disabled = false;
     }else{
-        document.getElementById("buildBrewaryButton").disabled = true;
+        document.getElementById("buildBreweryButton").disabled = true;
     }
 
     if(stone >= farmCost){
@@ -563,19 +563,19 @@ function onTraderClick(){
     }
 }
 
-function onBrewaryClick(){
-    stone -= brewaryCost;
+function onBreweryClick(){
+    stone -= breweryCost;
     maxBrewsters += 5;
     numberOfBrewaries++;
 
-    brewaryCost = Math.round(BASEBREWARYCOST * Math.pow(BREWARYMULTIPLIER, numberOfBrewaries));
-    document.getElementById("brewaryCost").innerHTML = parseInt(brewaryCost);
+    breweryCost = Math.round(BASEBREWERYCOST * Math.pow(BREWERYMULTIPLIER, numberOfBrewaries));
+    document.getElementById("breweryCost").innerHTML = parseInt(breweryCost);
     document.getElementById("numBrewaries").innerHTML = numberOfBrewaries;
     document.getElementById("numBrewsters").innerHTML = numberOfBrewsters + " / " + maxBrewsters;
 
     if(numberOfBrewaries <= 1){
         document.getElementById("hireBrewsterButton").style.display = '';
-        document.getElementById("brewaryData").style.display = '';
+        document.getElementById("breweryData").style.display = '';
         document.getElementById("brewsterData").style.display = '';
         document.getElementById("purchaseGrainButton").style.display = '';
         document.getElementById("grainData").style.display = '';
@@ -734,7 +734,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buildShedButton").style.display = 'none';
     document.getElementById("buildSmelteryButton").style.display = 'none';
     document.getElementById("buildTraderButton").style.display = 'none';
-    document.getElementById("buildBrewaryButton").style.display = 'none';
+    document.getElementById("buildBreweryButton").style.display = 'none';
     
     document.getElementById("hireEngineerButton").style.display = 'none';
     document.getElementById("researchCoalMiningButton").style.display = 'none';
@@ -750,7 +750,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("sellIronBarsButton").style.display = 'none';
     
     document.getElementById("hireBrewsterButton").style.display = 'none';
-    document.getElementById("brewaryData").style.display = 'none';
+    document.getElementById("breweryData").style.display = 'none';
     document.getElementById("brewsterData").style.display = 'none';
     document.getElementById("purchaseGrainButton").style.display = 'none';
     document.getElementById("grainData").style.display = 'none';
@@ -772,7 +772,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buildShedButton").addEventListener("click", onShedClick);
     document.getElementById("buildSmelteryButton").addEventListener("click", onSmelteryClick);
     document.getElementById("buildTraderButton").addEventListener("click", onTraderClick);
-    document.getElementById("buildBrewaryButton").addEventListener("click", onBrewaryClick);
+    document.getElementById("buildBreweryButton").addEventListener("click", onBreweryClick);
     document.getElementById("buildFarmButton").addEventListener("click", onFarmClick);
 
     document.getElementById("hireEngineerButton").addEventListener("click", onEngineerClick);
