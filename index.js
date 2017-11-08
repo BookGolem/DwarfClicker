@@ -34,6 +34,9 @@ var BASETRADERCOST = 100;
 var TRADERMULTIPLIER = 1.3;
 var BASEBREWARYCOST = 2500;
 var BREWARYMULTIPLIER = 1.3;
+var BASEFARMCOST = 2000;
+var BASEFARMGRAINCOST = 1500;
+var FARMMULTIPLIER = 1.3;
 
 //Constants - Engineering 
 var BASEENGINEERCOST = 100;
@@ -42,6 +45,8 @@ var ENGINEERMULTIPLIER = 1.1;
 //Constants - Agriculture
 var BASEBREWSTERCOST = 75;
 var BREWSTERMULTIPLIER = 1.15
+var BASEFARMERCOST = 40;
+var FARMERMULTIPLIER = 1.12;
 
 //Limits
 var maxDwarfs = 0;
@@ -50,6 +55,7 @@ var maxDrills = 0;
 var maxMetallurgists = 0;
 var maxMerchants = 0;
 var maxBrewsters = 0;
+var maxFarmers = 0;
 
 //Variables - Resources
 var clickOreValue = 1; //The amount by which clicking increases Ore.
@@ -122,6 +128,10 @@ var numberOfTraders = 0;
 var brewaryCost = BASEBREWARYCOST;
 var numberOfBrewaries = 0;
 
+var farmCost = BASEFARMCOST;
+var farmGrainCost = BASEFARMGRAINCOST;
+var numberOfFarms = 0;
+
 //Variables - Engineering 
 var engineerCost = BASEENGINEERCOST; //The cost of hiring a new miner
 var numberOfEngineers = 0; //The number of miners mining
@@ -134,6 +144,11 @@ var brewsterCost = BASEBREWSTERCOST;
 var numberOfBrewsters = 0;
 var brewingSpeed = 0.1;
 var grainPerAle = 4; 
+
+var farmerCost = BASEFARMERCOST;
+var numberOfFarmers = 0;
+var farmerGrainProduction = 0.2;
+var farmingSpeed = 0;
 
 //Variables - Commerce
 var numberOfMerchants = 0;
@@ -208,6 +223,12 @@ function onTimerTick() {
         document.getElementById("buildBrewaryButton").disabled = true;
     }
 
+    if(stone >= farmCost){
+        document.getElementById("buildFarmButton").disabled = false;
+    }else{
+        document.getElementById("buildFarmButton").disabled = true;
+    }
+
     //ENGINEERING
     if(goldIngots >= engineerCost && dwarfs < maxDwarfs && numberOfEngineers < maxEngineers){
         document.getElementById("hireEngineerButton").disabled = false;
@@ -236,6 +257,11 @@ function onTimerTick() {
         document.getElementById("hireBrewsterButton").disabled = false;
     }else{
         document.getElementById("hireBrewsterButton").disabled = true;
+    }
+    if(goldIngots >= farmerCost && dwarfs < maxDwarfs && numberOfFarmers < maxFarmers){
+        document.getElementById("hireFarmerButton").disabled = false;
+    }else{
+        document.getElementById("hireFarmerButton").disabled = true;
     }
 
     //COMMERCE
@@ -288,6 +314,8 @@ function onAutoTick() {
     calculateMiningSpeed();
     calculateBrewingSpeed();
 
+    //Farming
+    grain += (farmingSpeed);
 
     //Mining
     ore += autoOreValue;
@@ -377,7 +405,7 @@ function calculateMiningSpeed(){
 }
 
 function calculateBrewingSpeed(){
-    var brewingRate = numberOfBrewsters * brewingSpeed;
+    var brewingRate = numberOfBrewsters * brewingSpeed * aleMultiplier;
 
     if(grain >= brewingRate*grainPerAle){
         grain -= brewingRate*grainPerAle;
@@ -386,11 +414,11 @@ function calculateBrewingSpeed(){
         document.getElementById("aleNum").innerHTML = parseInt(ale);
         document.getElementById("aleProdSpeed").innerHTML = (Math.round(brewingRate * 100)/10);
     }else{
-        document.getElementById("aleNum").innerHTML = ale;
+        document.getElementById("aleNum").innerHTML = parseInt(ale);
         document.getElementById("aleProdSpeed").innerHTML = 0;
     }
 
-    
+    farmingSpeed = numberOfFarmers*farmerGrainProduction*aleMultiplier;
 }
 
 //INDUSTRY
@@ -423,6 +451,7 @@ function onDrillClick(){
     steamDrillIronCost = Math.round(BASEDRILLIRONCOST * Math.pow(DRILLMULTIPLIER, numberOfSteamDrills));
     
     document.getElementById("drillCost").innerHTML = parseInt(steamDrillCost);
+    document.getElementById("drillIronCost").innerHTML = parseInt(steamDrillIronCost);
     
     if(numberOfSteamDrills == 1){
         document.getElementById("drillData").style.display = '';
@@ -553,6 +582,25 @@ function onBrewaryClick(){
     }
 }
 
+function onFarmClick(){
+    stone -= farmCost;
+    grain -= farmGrainCost;
+    maxFarmers += 6;
+    numberOfFarms++;
+
+    farmCost = Math.round(BASEFARMCOST * Math.pow(FARMMULTIPLIER, numberOfFarms));
+    farmGrainCost = Math.round(BASEFARMGRAINCOST * Math.pow(FARMMULTIPLIER, numberOfFarms));
+    document.getElementById("farmCost").innerHTML = parseInt(farmCost);
+    document.getElementById("numFarms").innerHTML = numberOfFarms;
+    document.getElementById("numFarmers").innerHTML = numberOfFarms + " / " + maxFarmers;
+
+    if(numberOfFarms <= 1){
+        document.getElementById("hireFarmerButton").style.display = '';
+        document.getElementById("farmData").style.display = '';
+        document.getElementById("farmerData").style.display = '';
+    }
+}
+
 //ENGINEERING
 function onEngineerClick(){    
     goldIngots -= engineerCost;
@@ -599,6 +647,20 @@ function onBrewsterClick(){
     document.getElementById("brewsterCost").innerHTML = parseInt(brewsterCost);
     document.getElementById("numBrewsters").innerHTML = numberOfBrewsters + " / " + maxBrewsters;
 
+    if(numberOfBrewsters > 4){
+        document.getElementById("buildFarmButton").style.display = '';
+    }
+}
+
+function onFarmerClick(){
+    goldIngots -= farmerCost;
+    numberOfFarmers++;
+    dwarfs++;
+    calculateIncrements();
+
+    farmerCost = Math.round(BASEBREWSTERCOST * Math.pow(BREWSTERMULTIPLIER, numberOfFarmers));
+    document.getElementById("farmerCost").innerHTML = parseInt(brewsterCost);
+    document.getElementById("numFarmers").innerHTML = numberOfFarmers + " / " + maxFarmers;
 }
 
 //COMMERCE 
@@ -693,6 +755,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("purchaseGrainButton").style.display = 'none';
     document.getElementById("grainData").style.display = 'none';
 
+    document.getElementById("buildFarmButton").style.display = 'none';
+    document.getElementById("hireFarmerButton").style.display = 'none';
+    document.getElementById("farmData").style.display = 'none';
+    document.getElementById("farmerData").style.display = 'none';
+
     //do work
     document.getElementById("mineButton").addEventListener("click", onIncreaseClick);
 
@@ -706,6 +773,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buildSmelteryButton").addEventListener("click", onSmelteryClick);
     document.getElementById("buildTraderButton").addEventListener("click", onTraderClick);
     document.getElementById("buildBrewaryButton").addEventListener("click", onBrewaryClick);
+    document.getElementById("buildFarmButton").addEventListener("click", onFarmClick);
 
     document.getElementById("hireEngineerButton").addEventListener("click", onEngineerClick);
     document.getElementById("researchCoalMiningButton").addEventListener("click", function(){
@@ -738,4 +806,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     document.getElementById("hireBrewsterButton").addEventListener("click", onBrewsterClick);
+    document.getElementById("hireFarmerButton").addEventListener("click", onFarmerClick);
 });
