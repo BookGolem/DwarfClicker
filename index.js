@@ -106,7 +106,7 @@ var drillGoldSpeed = 0.05;
 var metallurgistCost = BASEMETALLURGISTCOST;
 var numberOfMetallurgists = 0;
 var metallurgistIronRate = 0.03;
-var metallurgistGoldRate = 0.05;
+var metallurgistGoldRate = 0.02;
 
 
 //Variables - Architecture
@@ -223,7 +223,7 @@ function onTimerTick() {
         document.getElementById("buildBreweryButton").disabled = true;
     }
 
-    if(stone >= farmCost){
+    if(stone >= farmCost && grain >= farmGrainCost){
         document.getElementById("buildFarmButton").disabled = false;
     }else{
         document.getElementById("buildFarmButton").disabled = true;
@@ -277,6 +277,12 @@ function onTimerTick() {
         document.getElementById("purchaseAleButton").disabled = true;
     }
 
+    if(goldIngots >= grainCost){
+        document.getElementById("purchaseGrainButton").disabled = false;
+    }else{
+        document.getElementById("purchaseGrainButton").disabled = true;
+    }
+
     if(ore >= 100){
         document.getElementById("sellIronOreButton").disabled = false;
     }else{
@@ -327,17 +333,21 @@ function onAutoTick() {
     if(ore > ironConversionSpeed){
         ore -= ironConversionSpeed;
         ironIngots += ironConversionSpeed;
+        document.getElementById("ironIngotSpeed").innerHTML = (Math.round(ironConversionSpeed * 100)/10);
     }else{
         ironIngots += ore;
         ore -= ore;
+        document.getElementById("ironIngotSpeed").innerHTML = (Math.round(autoOreValue * 100)/10);
     }
-
+    
     if(goldOre > goldConversionSpeed){
         goldOre -= goldConversionSpeed;
         goldIngots += goldConversionSpeed;
+        document.getElementById("smeltingGoldSpeed").innerHTML = (Math.round(goldConversionSpeed * 100)/10);
     }else{
         goldIngots += goldOre;
         goldOre -= goldOre;
+        document.getElementById("smeltingGoldSpeed").innerHTML = (Math.round(autoGoldValue * 100)/10);
     }
     goldIngots += merchantIncome;
 
@@ -397,8 +407,7 @@ function calculateMiningSpeed(){
     ironConversionSpeed = (numberOfMetallurgists*metallurgistIronRate*aleMultiplier);
     goldConversionSpeed = (numberOfMetallurgists*metallurgistGoldRate*aleMultiplier*goldMultiplier);
 
-    document.getElementById("ironIngotSpeed").innerHTML = (Math.round(ironConversionSpeed * 100)/10);
-    document.getElementById("smeltingGoldSpeed").innerHTML = (Math.round(goldConversionSpeed * 100)/10);
+    
 
     document.getElementById("merchantGoldSpeed").innerHTML = (Math.round(merchantIncome * 100)/10);
     document.getElementById("goldIngotSpeed").innerHTML = (Math.round((goldConversionSpeed + merchantIncome) * 100)/10);
@@ -592,7 +601,7 @@ function onFarmClick(){
     farmGrainCost = Math.round(BASEFARMGRAINCOST * Math.pow(FARMMULTIPLIER, numberOfFarms));
     document.getElementById("farmCost").innerHTML = parseInt(farmCost);
     document.getElementById("numFarms").innerHTML = numberOfFarms;
-    document.getElementById("numFarmers").innerHTML = numberOfFarms + " / " + maxFarmers;
+    document.getElementById("numFarmers").innerHTML = numberOfFarmers + " / " + maxFarmers;
 
     if(numberOfFarms <= 1){
         document.getElementById("hireFarmerButton").style.display = '';
@@ -658,9 +667,10 @@ function onFarmerClick(){
     dwarfs++;
     calculateIncrements();
 
-    farmerCost = Math.round(BASEBREWSTERCOST * Math.pow(BREWSTERMULTIPLIER, numberOfFarmers));
-    document.getElementById("farmerCost").innerHTML = parseInt(brewsterCost);
+    farmerCost = Math.round(BASEFARMERCOST * Math.pow(FARMERMULTIPLIER, numberOfFarmers));
+    document.getElementById("farmerCost").innerHTML = parseInt(farmerCost);
     document.getElementById("numFarmers").innerHTML = numberOfFarmers + " / " + maxFarmers;
+    document.getElementById("grainProdSpeed").innerHTML = parseInt(farmingSpeed);
 }
 
 //COMMERCE 
