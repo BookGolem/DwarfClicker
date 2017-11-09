@@ -23,7 +23,7 @@ var MERCHANTMULTIPLIER = 1.2;
 
 //Constants - Architecture
 var BASEBURROWCOST = 50;
-var BURROWMULTIPLIER = 2; //This is huge. Price doubles each time.
+var BURROWMULTIPLIER = 1.4; //This is huge. Price = price * multiplier each time.
 var BASEWORKSHOPCOST = 1000;
 var WORKSHOPMULTIPLIER = 1.5;
 var BASESHEDCOST = 3000;
@@ -600,6 +600,7 @@ function onFarmClick(){
     farmCost = Math.round(BASEFARMCOST * Math.pow(FARMMULTIPLIER, numberOfFarms));
     farmGrainCost = Math.round(BASEFARMGRAINCOST * Math.pow(FARMMULTIPLIER, numberOfFarms));
     document.getElementById("farmCost").innerHTML = parseInt(farmCost);
+    document.getElementById("farmGrainCost").innerHTML = parseInt(farmGrainCost);
     document.getElementById("numFarms").innerHTML = numberOfFarms;
     document.getElementById("numFarmers").innerHTML = numberOfFarmers + " / " + maxFarmers;
 
