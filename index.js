@@ -105,6 +105,7 @@ var drillGoldSpeed = 0.05;
 
 var metallurgistCost = BASEMETALLURGISTCOST;
 var numberOfMetallurgists = 0;
+var smeltingEfficiencyMultiplier = 1;
 var metallurgistIronRate = 0.03;
 var metallurgistGoldRate = 0.02;
 
@@ -404,8 +405,8 @@ function calculateMiningSpeed(){
     autoResearchValue = (numberOfEngineers*engineerResearchSpeed*aleMultiplier);
     document.getElementById("researchSpeed").innerHTML = (Math.round(autoResearchValue * 100)/10);
 
-    ironConversionSpeed = (numberOfMetallurgists*metallurgistIronRate*aleMultiplier);
-    goldConversionSpeed = (numberOfMetallurgists*metallurgistGoldRate*aleMultiplier*goldMultiplier);
+    ironConversionSpeed = (numberOfMetallurgists*metallurgistIronRate*smeltingEfficiencyMultiplier*aleMultiplier);
+    goldConversionSpeed = (numberOfMetallurgists*metallurgistGoldRate*smeltingEfficiencyMultiplier*aleMultiplier*goldMultiplier);
 
     
 
@@ -751,9 +752,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("researchCoalMiningButton").style.display = 'none';
     document.getElementById("researchGoldMiningButton").style.display = 'none';
     document.getElementById("researchSmeltingButton").style.display = 'none';
+    document.getElementById("researchAdvSmeltingButton").style.display = 'none';
     document.getElementById("researchSteelPicksButton").style.display = 'none';
     document.getElementById("researchSteamButton").style.display = 'none';
     document.getElementById("researchDrillButton").style.display = 'none';
+    document.getElementById("researchIronVeinsButton").style.display = 'none';
+    document.getElementById("researchReinforcedCoalButton").style.display = 'none';
+    document.getElementById("researchGoldVeinsButton").style.display = 'none';
 
     document.getElementById("hireMerchantButton").style.display = 'none';
     document.getElementById("purchaseAleButton").style.display = 'none';
@@ -794,7 +799,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         doResearch("goldMiningResearch", "GOLDMINING", "researchGoldMiningButton", "goldResearchProgress", 1000, goldMiningResearchComplete)
     });
     document.getElementById("researchSmeltingButton").addEventListener("click", function(){
-        doResearch("smeltingResearch", "SMELTING", "researchSmeltingButton", "smeltingResearchProgress", 1000, smeltingResearchComplete)
+        doResearch("smeltingResearch", "SMELTING", "researchSmeltingButton", "smeltingResearchProgress", 500, smeltingResearchComplete)
+    });
+    document.getElementById("researchAdvSmeltingButton").addEventListener("click", function(){
+        doResearch("advSmeltingResearch", "ADVSMELTING", "researchAdvSmeltingButton", "advSmeltingResearchProgress", 500, advSmeltingResearchComplete)
     });
     document.getElementById("researchSteelPicksButton").addEventListener("click", function(){
         doResearch("steelPickResearch", "STEELPICK", "researchSteelPicksButton", "steelPicksResearchProgress", 2000, steelPickResearchComplete)
@@ -804,6 +812,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
     document.getElementById("researchDrillButton").addEventListener("click", function(){
         doResearch("drillResearch", "DRILL", "researchDrillButton", "drillResearchProgress", 4000, drillResearchComplete)
+    });
+    document.getElementById("researchIronVeinsButton").addEventListener("click", function(){
+        doResearch("ironVeinsResearch", "IRONVEINS", "researchIronVeinsButton", "ironVeinsResearchProgress", 1500, ironVeinsResearchComplete)
+    });
+    document.getElementById("researchReinforcedCoalButton").addEventListener("click", function(){
+        doResearch("reinforcedCoalResearch", "REINFORCEDCOAL", "researchReinforcedCoalButton", "reinforcedCoalResearchProgress", 1500, reinforcedCoalResearchComplete)
+    });
+    document.getElementById("researchGoldVeinsButton").addEventListener("click", function(){
+        doResearch("goldVeinsResearch", "GOLDVEINS", "researchGoldVeinsButton", "goldVeinsResearchProgress", 1500, goldVeinsResearchComplete)
     });
 
     document.getElementById("hireMerchantButton").addEventListener("click", onMerchantClick);

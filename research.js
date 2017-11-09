@@ -35,6 +35,7 @@ function coalMiningResearchComplete(){
     coalMultiplier += 1;
     document.getElementById("coalData").style.display = '';
     calculateIncrements();
+    document.getElementById("researchReinforcedCoalButton").style.display = '';
     if(smeltingResearch >= 1000){
         document.getElementById("researchSteamButton").style.display = '';
     }
@@ -45,12 +46,21 @@ function goldMiningResearchComplete(){
     goldMultiplier += 1;
     document.getElementById("goldData").style.display = '';
     calculateIncrements();
+    if(ironVeinsResearch >= 1500){
+        document.getElementById("researchGoldVeinsButton").style.display = '';
+    }
 }
 
 var smeltingResearch = 0;
 function smeltingResearchComplete(){
     document.getElementById("researchSteelPicksButton").style.display = '';
     document.getElementById("buildSmelteryButton").style.display = '';
+    document.getElementById("researchAdvSmeltingButton").style.display = '';
+}
+
+var advSmeltingResearch = 0;
+function advSmeltingResearchComplete(){
+    smeltingEfficiencyMultiplier += 0.5;
     if(coalMiningResearch >= 2000){
         document.getElementById("researchSteamButton").style.display = '';
     }
@@ -65,9 +75,31 @@ function steelPickResearchComplete(){
 var steamResearch = 0;
 function steamResearchComplete(){
     document.getElementById("researchDrillButton").style.display = '';
+    //Enable production of convayors and lifts for automated mining too.
 }
 
 var drillResearch = 0;
 function drillResearchComplete(){
     document.getElementById("buildShedButton").style.display = '';
+}
+
+var ironVeinsResearch = 0;
+function ironVeinsResearchComplete(){
+    minerOreSpeed = minerOreSpeed*2;
+    calculateIncrements();
+    if(goldMiningResearch >= 1000){
+        document.getElementById("researchGoldVeinsButton").style.display = '';
+    }
+}
+
+var reinforcedCoalResearch = 0;
+function reinforcedCoalResearchComplete(){
+    minerCoalSpeed = minerCoalSpeed*2
+    calculateIncrements();
+}
+
+var goldVeinsResearch = 0;
+function goldVeinsResearchComplete(){
+    minerGoldSpeed = minerGoldSpeed*2
+    calculateIncrements();
 }
