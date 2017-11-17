@@ -314,9 +314,9 @@ function onAutoTick() {
 
     if(coal >= numberOfSteamDrills){
         coal -= numberOfSteamDrills;
-        coalMultiplier = 1;
+        coalSupplyMultiplier = 1;
     }else{
-        coalMultiplier = 0;
+        coalSupplyMultiplier = 0;
     }
     calculateMiningSpeed();
     calculateBrewingSpeed();
@@ -387,10 +387,10 @@ function calculateMiningSpeed(){
     minerCoalRate = numberOfMiners*minerCoalSpeed*minerEfficiencyMultiplier*aleMultiplier;
     minerGoldRate = numberOfMiners*minerGoldSpeed*minerEfficiencyMultiplier*aleMultiplier;
 
-    drillOreRate = numberOfSteamDrills*drillOreSpeed*drillEfficiencyMultiplier*aleMultiplier*coalMultiplier;
-    drillStoneRate = numberOfSteamDrills*drillStoneSpeed*drillEfficiencyMultiplier*aleMultiplier*coalMultiplier;
-    drillCoalRate = numberOfSteamDrills*drillCoalSpeed*drillEfficiencyMultiplier*aleMultiplier*coalMultiplier;
-    drillGoldRate = numberOfSteamDrills*drillGoldSpeed*drillEfficiencyMultiplier*aleMultiplier*coalMultiplier;
+    drillOreRate = numberOfSteamDrills*drillOreSpeed*drillEfficiencyMultiplier*aleMultiplier*coalSupplyMultiplier;
+    drillStoneRate = numberOfSteamDrills*drillStoneSpeed*drillEfficiencyMultiplier*aleMultiplier*coalSupplyMultiplier;
+    drillCoalRate = numberOfSteamDrills*drillCoalSpeed*drillEfficiencyMultiplier*aleMultiplier*coalSupplyMultiplier;
+    drillGoldRate = numberOfSteamDrills*drillGoldSpeed*drillEfficiencyMultiplier*aleMultiplier*coalSupplyMultiplier;
 
     autoOreValue = (minerOreRate)+(drillOreRate);
     autoStoneValue = (minerStoneRate)+(drillStoneRate);
@@ -429,6 +429,7 @@ function calculateBrewingSpeed(){
     }
 
     farmingSpeed = numberOfFarmers*farmerGrainProduction*aleMultiplier;
+    document.getElementById("grainProdSpeed").innerHTML = parseInt(farmingSpeed*10);
 }
 
 //INDUSTRY
@@ -672,7 +673,6 @@ function onFarmerClick(){
     farmerCost = Math.round(BASEFARMERCOST * Math.pow(FARMERMULTIPLIER, numberOfFarmers));
     document.getElementById("farmerCost").innerHTML = parseInt(farmerCost);
     document.getElementById("numFarmers").innerHTML = numberOfFarmers + " / " + maxFarmers;
-    document.getElementById("grainProdSpeed").innerHTML = parseInt(farmingSpeed);
 }
 
 //COMMERCE 
@@ -802,7 +802,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         doResearch("smeltingResearch", "SMELTING", "researchSmeltingButton", "smeltingResearchProgress", 500, smeltingResearchComplete)
     });
     document.getElementById("researchAdvSmeltingButton").addEventListener("click", function(){
-        doResearch("advSmeltingResearch", "ADVSMELTING", "researchAdvSmeltingButton", "advSmeltingResearchProgress", 500, advSmeltingResearchComplete)
+        doResearch("advSmeltingResearch", "ADVSMELTING", "researchAdvSmeltingButton", "advSmeltingResearchProgress", 1000, advSmeltingResearchComplete)
     });
     document.getElementById("researchSteelPicksButton").addEventListener("click", function(){
         doResearch("steelPickResearch", "STEELPICK", "researchSteelPicksButton", "steelPicksResearchProgress", 2000, steelPickResearchComplete)
