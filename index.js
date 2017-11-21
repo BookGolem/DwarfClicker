@@ -144,7 +144,7 @@ var grainCost = 25; //Cost for 1000 grain. (4 grain = 1 ale)
 var brewsterCost = BASEBREWSTERCOST;
 var numberOfBrewsters = 0;
 var brewingSpeed = 0.1;
-var grainPerAle = 4; 
+var grainPerAle = 2; //Base is 4, switched to 2 for an experiment.
 
 var farmerCost = BASEFARMERCOST;
 var numberOfFarmers = 0;
@@ -793,34 +793,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     document.getElementById("hireEngineerButton").addEventListener("click", onEngineerClick);
     document.getElementById("researchCoalMiningButton").addEventListener("click", function(){
-        doResearch("coalMiningResearch", "COALMINING", "researchCoalMiningButton", "coalResearchProgress", 2000, coalMiningResearchComplete)
+        doResearch("coalMiningResearch", "COALMINING", "researchCoalMiningButton", "coalResearchProgress", COALMININGRESEARCHTARGET, coalMiningResearchComplete)
     });
     document.getElementById("researchGoldMiningButton").addEventListener("click", function(){
-        doResearch("goldMiningResearch", "GOLDMINING", "researchGoldMiningButton", "goldResearchProgress", 1000, goldMiningResearchComplete)
+        doResearch("goldMiningResearch", "GOLDMINING", "researchGoldMiningButton", "goldResearchProgress", GOLDMININGRESEARCHTARGET, goldMiningResearchComplete)
     });
     document.getElementById("researchSmeltingButton").addEventListener("click", function(){
-        doResearch("smeltingResearch", "SMELTING", "researchSmeltingButton", "smeltingResearchProgress", 500, smeltingResearchComplete)
+        doResearch("smeltingResearch", "SMELTING", "researchSmeltingButton", "smeltingResearchProgress", SMELTINGRESEARCHTARGET, smeltingResearchComplete)
     });
     document.getElementById("researchAdvSmeltingButton").addEventListener("click", function(){
-        doResearch("advSmeltingResearch", "ADVSMELTING", "researchAdvSmeltingButton", "advSmeltingResearchProgress", 1000, advSmeltingResearchComplete)
+        doResearch("advSmeltingResearch", "ADVSMELTING", "researchAdvSmeltingButton", "advSmeltingResearchProgress", ADVSMELTINGRESEARCHTARGET, advSmeltingResearchComplete)
     });
     document.getElementById("researchSteelPicksButton").addEventListener("click", function(){
-        doResearch("steelPickResearch", "STEELPICK", "researchSteelPicksButton", "steelPicksResearchProgress", 2000, steelPickResearchComplete)
+        doResearch("steelPickResearch", "STEELPICK", "researchSteelPicksButton", "steelPicksResearchProgress", STEELPICKRESEARCHTARGET, steelPickResearchComplete)
     });
     document.getElementById("researchSteamButton").addEventListener("click", function(){
-        doResearch("steamResearch", "STEAM", "researchSteamButton", "steamResearchProgress", 2000, steamResearchComplete)
+        doResearch("steamResearch", "STEAM", "researchSteamButton", "steamResearchProgress", STEAMRESEARCHTARGET, steamResearchComplete)
     });
     document.getElementById("researchDrillButton").addEventListener("click", function(){
-        doResearch("drillResearch", "DRILL", "researchDrillButton", "drillResearchProgress", 4000, drillResearchComplete)
+        doResearch("drillResearch", "DRILL", "researchDrillButton", "drillResearchProgress", DRILLRESEARCHTARGET, drillResearchComplete)
     });
     document.getElementById("researchIronVeinsButton").addEventListener("click", function(){
-        doResearch("ironVeinsResearch", "IRONVEINS", "researchIronVeinsButton", "ironVeinsResearchProgress", 1500, ironVeinsResearchComplete)
+        doResearch("ironVeinsResearch", "IRONVEINS", "researchIronVeinsButton", "ironVeinsResearchProgress", IRONVEINSRESEARCHTARGET, ironVeinsResearchComplete)
     });
     document.getElementById("researchReinforcedCoalButton").addEventListener("click", function(){
-        doResearch("reinforcedCoalResearch", "REINFORCEDCOAL", "researchReinforcedCoalButton", "reinforcedCoalResearchProgress", 1500, reinforcedCoalResearchComplete)
+        doResearch("reinforcedCoalResearch", "REINFORCEDCOAL", "researchReinforcedCoalButton", "reinforcedCoalResearchProgress", REINFORCEDCOALRESEARCHTARGET, reinforcedCoalResearchComplete)
     });
     document.getElementById("researchGoldVeinsButton").addEventListener("click", function(){
-        doResearch("goldVeinsResearch", "GOLDVEINS", "researchGoldVeinsButton", "goldVeinsResearchProgress", 1500, goldVeinsResearchComplete)
+        doResearch("goldVeinsResearch", "GOLDVEINS", "researchGoldVeinsButton", "goldVeinsResearchProgress", GOLDVEINRESEARCHTARGET, goldVeinsResearchComplete)
     });
 
     document.getElementById("hireMerchantButton").addEventListener("click", onMerchantClick);
