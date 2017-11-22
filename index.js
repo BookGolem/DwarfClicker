@@ -23,24 +23,24 @@ var MERCHANTMULTIPLIER = 1.2;
 
 //Constants - Architecture
 var BASEBURROWCOST = 50;
-var BURROWMULTIPLIER = 1.4; //This is huge. Price = price * multiplier each time.
+var BURROWMULTIPLIER = 1.3; //This is huge. Price = price * multiplier each time.
 var BASEWORKSHOPCOST = 1000;
-var WORKSHOPMULTIPLIER = 1.5;
+var WORKSHOPMULTIPLIER = 1.4;
 var BASESHEDCOST = 3000;
-var SHEDMULTIPLIER = 1.5;
+var SHEDMULTIPLIER = 1.3;
 var BASESMELTERYCOST = 2000;
-var SMELTERYMULTIPLIER = 1.5;
+var SMELTERYMULTIPLIER = 1.2;
 var BASETRADERCOST = 100;
 var TRADERMULTIPLIER = 1.3;
 var BASEBREWERYCOST = 2500;
-var BREWERYMULTIPLIER = 1.3;
+var BREWERYMULTIPLIER = 1.2;
 var BASEFARMCOST = 2000;
 var BASEFARMGRAINCOST = 1500;
-var FARMMULTIPLIER = 1.3;
+var FARMMULTIPLIER = 1.2;
 
 //Constants - Engineering 
 var BASEENGINEERCOST = 100;
-var ENGINEERMULTIPLIER = 1.1;
+var ENGINEERMULTIPLIER = 1.08;
 
 //Constants - Agriculture
 var BASEBREWSTERCOST = 75;
@@ -144,7 +144,7 @@ var grainCost = 25; //Cost for 1000 grain. (4 grain = 1 ale)
 var brewsterCost = BASEBREWSTERCOST;
 var numberOfBrewsters = 0;
 var brewingSpeed = 0.1;
-var grainPerAle = 2; //Base is 4, switched to 2 for an experiment.
+var grainPerAle = 3; //Base is 4, switched to 3 for an experiment.
 
 var farmerCost = BASEFARMERCOST;
 var numberOfFarmers = 0;
@@ -312,8 +312,8 @@ function onAutoTick() {
         aleMultiplier = 0.5;
     }
 
-    if(coal >= numberOfSteamDrills){
-        coal -= numberOfSteamDrills;
+    if(coal >= numberOfSteamDrills*steamDrillCoalUse){
+        coal -= numberOfSteamDrills*steamDrillCoalUse;
         coalSupplyMultiplier = 1;
     }else{
         coalSupplyMultiplier = 0;

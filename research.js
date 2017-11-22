@@ -30,7 +30,7 @@ function doMoreResearch(researchToDo, researchID, researchButtonName, researchPr
 }
 
 //Specific research functions and variables
-var COALMININGRESEARCHTARGET = 2000;
+var COALMININGRESEARCHTARGET = 1000;
 var coalMiningResearch = 0;
 function coalMiningResearchComplete(){
     coalMultiplier += 1;
