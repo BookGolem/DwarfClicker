@@ -1,13 +1,14 @@
-#resources{
-    padding-bottom: 0.5em;
+#masterLayout{
+    height:88%;
 }
 
 button{
-    width: 12em;
+    width: 11em;
 }
 
 .table{
     display:table;
+    padding-bottom: 0.5em;
 }
 
 .tr{
@@ -28,5 +29,5 @@ button{
 }
 
 .scrollOverflow{
-    overflow: scroll;
+    overflow-x: scroll;
 }

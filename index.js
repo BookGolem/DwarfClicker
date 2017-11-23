@@ -446,7 +446,6 @@ function onMinerClick(){
     document.getElementById("minerCost").innerHTML = parseInt(minerCost);
 
     if(numberOfMiners == 1){
-        document.getElementById("industrySector").style.display = '';
         document.getElementById("minerData").style.display = '';
     }
 }
@@ -501,7 +500,6 @@ function onHouseClick(){
 
     if(numberOfBurrows <= 1){
         document.getElementById("hireMinerButton").style.display = '';
-        document.getElementById("architectureSector").style.display = '';
         document.getElementById("popData").style.display = '';
         document.getElementById("burrowData").style.display = '';
     }
@@ -729,8 +727,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     document.getElementById("merchantData").style.display = 'none';
 
-    document.getElementById("industrySector").style.display = 'none';
-    document.getElementById("architectureSector").style.display = 'none';
     document.getElementById("engineeringSector").style.display = 'none';
 
     document.getElementById("hireMinerButton").style.display = 'none';
