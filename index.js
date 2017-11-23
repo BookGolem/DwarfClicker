@@ -242,6 +242,7 @@ function onTimerTick() {
         if(stone >= BASETRADERCOST){
             document.getElementById("buildTraderButton").style.display = '';
             if(stone >= BASEWORKSHOPCOST){
+                document.getElementById("engineeringSector").style.display = '';
                 document.getElementById("buildWorkshopButton").style.display = '';
             }
         }
@@ -518,8 +519,6 @@ function onWorkshopClick(){
 
     if(numberOfWorkshops <= 1){
         document.getElementById("hireEngineerButton").style.display = '';
-        document.getElementById("workshopData").style.display = '';
-        document.getElementById("engineerData").style.display = '';
     }
 }
 
@@ -627,7 +626,6 @@ function onEngineerClick(){
 
     if(numberOfEngineers == 1){
         document.getElementById("researchSmeltingButton").style.display = '';
-        document.getElementById("engineeringSector").style.display = '';
         document.getElementById("researchData").style.display = '';
     }else if(numberOfEngineers == 2){
         document.getElementById("researchGoldMiningButton").style.display = '';
@@ -727,9 +725,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("minerData").style.display = 'none';
     document.getElementById("drillData").style.display = 'none';
     document.getElementById("burrowData").style.display = 'none';
-    document.getElementById("workshopData").style.display = 'none';
     document.getElementById("shedData").style.display = 'none';
-    document.getElementById("engineerData").style.display = 'none';
 
     document.getElementById("merchantData").style.display = 'none';
 

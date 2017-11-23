@@ -24,8 +24,8 @@
         </div>
         <div class="table">
             <div class="tr">
-                <div id="stats" class="td stats">
-                    <div id="industrySector">
+                <div id="stats" class="td ">
+                    <div id="industrySector" class="stats">
                         <b>Industry</b>
                         <div id="minerData">Number of miners: <span id="numMiners">0</span></div>
                         <div id="drillData">Number of steam drills: <span id="numDrills">0</span></div>
@@ -34,17 +34,13 @@
                     <div id="architectureSector">
                         <b>Architecture</b>
                         <div id="burrowData">Number of dwarf burrows: <span id="numBurrows">0</span></div>
-                        <div id="workshopData">Number of engineer's workshops: <span id="numWorkshops">0</span></div>
                         <div id="shedData">Number of drill sheds: <span id="numSheds">0</span></div>
                         <div id="smelteryData">Number of smelteries: <span id="numSmelteries">0</span></div>
                         <div id="traderData">Number of trading posts: <span id="numTraders">0</span></div>
                         <div id="breweryData">Number of brewaries: <span id="numBrewaries">0</span></div>
                         <div id="farmData">Number of farms: <span id="numFarms">0</span></div>
                     </div>
-                    <div id="engineeringSector">
-                        <b>Engineering</b>
-                        <div id="engineerData">Number of engineers: <span id="numEngineers">0 / 0</span></div>
-                    </div>
+                    
                     <div id="agricultureSector">
                         <b>Agriculture</b>
                         <div id="brewsterData">Number of brewsters: <span id="numBrewsters">0 / 0</span></div>
@@ -65,7 +61,6 @@
                 </div>
                 <div id="buildingControls" class="td">
                     <div><button id="buildBurrowButton" title="You'll need housing before you can recruit more dwarfs.">Construct Dwarf Burrow <br>(costs <span id="burrowCost">100</span> Stone)</button></div>
-                    <div><button id="buildWorkshopButton" title="The Engineers' Guild is always coming up with new ideas...">Construct Engineer's Workshop <br>(costs <span id="workshopCost">1000</span> Stone)</button></div>
                     <div><button id="buildShedButton" title="We need somewhere to build and store Steam Drills.">Construct Drill Shed <br>(costs <span id="shedCost">3000</span> Stone)</button></div>
                     <div><button id="buildSmelteryButton" title="Time to turn ore into metal.">Construct Smeltery <br>(costs <span id="smelteryCost">2000</span> Stone)</button></div>
                     <div><button id="buildTraderButton" title="Buy goods and set up trade deals.">Construct Trading Post <br>(costs <span id="traderCost">100</span> Stone)</button></div>
@@ -73,21 +68,6 @@
                     <div><button id="buildFarmButton" title="Farming should take pressure off our merchants.">Construct Farm 
                         <br>(costs <span id="farmCost">2500</span> Stone)
                         <br>(costs <span id="farmGrainCost">1500</span> Grain)</button></div>
-                </div>
-                <div id="researchControls" class="td">
-                    <div><button id="hireEngineerButton" title="Recruit an Engineer to come up with some improvements.">Hire Dwarf Engineer <br>(costs <span id="engineerCost">100</span> Gold)</button></div>
-                    <div><button id="researchGoldMiningButton" title="Finally, what we've been looking for!'">Gold Mining <br>(<span id="goldResearchProgress">0</span>/1000)</button></div>
-                    <div><button id="researchCoalMiningButton" title="We need a better source of fuel...">Coal Mining <br>(<span id="coalResearchProgress">0</span>/2000)</button></div>
-                    <div><button id="researchSmeltingButton" title="It's time we smelted this ore.'">Basic Smelting Techniques <br>(<span id="smeltingResearchProgress">0</span>/500)</button></div>
-                    <div><button id="researchAdvSmeltingButton" title="Better smelting techniques could lead to all manner of things...">Advanced Smelting Techniques <br>(<span id="advSmeltingResearchProgress">0</span>/1000)</button></div>
-                    
-                    <div><button id="researchIronVeinsButton" title="Following the veins should make mining more efficient.">Iron Vein Analysis <br>(<span id="ironVeinsResearchProgress">0</span>/1500)</button></div>
-                    <div><button id="researchReinforcedCoalButton" title="Standard safety procedures make for faster work.">Reinforced Coal Faces <br>(<span id="reinforcedCoalResearchProgress">0</span>/1500)</button></div>
-                    <div><button id="researchGoldVeinsButton" title="Turns out that gold comes in veins too.">Gold Vein Analysis <br>(<span id="goldVeinsResearchProgress">0</span>/1500)</button></div>
-
-                    <div><button id="researchSteelPicksButton" title="With high quality steel picks, our miners will be able to mine faster than ever!">Steel Pickaxe Heads <br>(<span id="steelPicksResearchProgress">0</span>/2000)</button></div>
-                    <div><button id="researchSteamButton" title="The power of Steam leads to automation...">Steam Power <br>(<span id="steamResearchProgress">0</span>/2000)</button></div>
-                    <div><button id="researchDrillButton" title="Ten times the power of a single dwarf!">Steam Drills! <br>(<span id="drillResearchProgress">0</span>/4000)</button></div>
                 </div>
                 <div id="agricultureControls" class="td">
                     <div><button id="hireBrewsterButton" title="Get that brew brewin'!">Hire Brewster <br>(costs <span id="brewsterCost">75</span> Gold)</button></div>
@@ -99,6 +79,33 @@
                     <div><button id="purchaseGrainButton" title="Brewing ale takes grain...">Purchase Grain <br>(costs <span id="grainCost">25</span> Gold)</button></div>
                     <div><button id="sellIronOreButton" title="We need gold.">Sell Iron Ore <br>(100 ore : 10 gold ingot)</div>
                     <div><button id="sellIronBarsButton" title="Iron is useful, but it sells well too!">Sell Iron Bars <br>(100 bars : 30 gold ingots)</div>
+                </div>
+            </div>
+            
+        </div>
+        <div id="engineeringSector" class="scrollOverflow">
+            <div class="table">
+                <div id="researchControls" class="tr">
+                    <div class="td ">
+                        <div id="workshopData" class="stats">Engineer's workshops: <span id="numWorkshops">0</span></div>
+                        <div id="engineerData">Engineers: <span id="numEngineers">0 / 0</span></div>
+                    </div>
+
+                    <div class="td"><button id="buildWorkshopButton" title="The Engineers' Guild is always coming up with new ideas...">Construct Engineer's Workshop <br>(costs <span id="workshopCost">1000</span> Stone)</button></div>
+                    <div class="td"><button id="hireEngineerButton" title="Recruit an Engineer to come up with some improvements.">Hire Dwarf Engineer <br>(costs <span id="engineerCost">100</span> Gold)</button></div>
+
+                    <div class="td"><button id="researchGoldMiningButton" title="Finally, what we've been looking for!'">Gold Mining <br>(<span id="goldResearchProgress">0</span>/1000)</button></div>
+                    <div class="td"><button id="researchCoalMiningButton" title="We need a better source of fuel...">Coal Mining <br>(<span id="coalResearchProgress">0</span>/2000)</button></div>
+                    <div class="td"><button id="researchSmeltingButton" title="It's time we smelted this ore.'">Basic Smelting Techniques <br>(<span id="smeltingResearchProgress">0</span>/500)</button></div>
+                    <div class="td"><button id="researchAdvSmeltingButton" title="Better smelting techniques could lead to all manner of things...">Advanced Smelting Techniques <br>(<span id="advSmeltingResearchProgress">0</span>/1000)</button></div>
+                    
+                    <div class="td"><button id="researchIronVeinsButton" title="Following the veins should make mining more efficient.">Iron Vein Analysis <br>(<span id="ironVeinsResearchProgress">0</span>/1500)</button></div>
+                    <div class="td"><button id="researchReinforcedCoalButton" title="Standard safety procedures make for faster work.">Reinforced Coal Faces <br>(<span id="reinforcedCoalResearchProgress">0</span>/1500)</button></div>
+                    <div class="td"><button id="researchGoldVeinsButton" title="Turns out that gold comes in veins too.">Gold Vein Analysis <br>(<span id="goldVeinsResearchProgress">0</span>/1500)</button></div>
+
+                    <div class="td"><button id="researchSteelPicksButton" title="With high quality steel picks, our miners will be able to mine faster than ever!">Steel Pickaxe Heads <br>(<span id="steelPicksResearchProgress">0</span>/2000)</button></div>
+                    <div class="td"><button id="researchSteamButton" title="The power of Steam leads to automation...">Steam Power <br>(<span id="steamResearchProgress">0</span>/2000)</button></div>
+                    <div class="td"><button id="researchDrillButton" title="Ten times the power of a single dwarf!">Steam Drills! <br>(<span id="drillResearchProgress">0</span>/4000)</button></div>
                 </div>
             </div>
         </div>

@@ -20,5 +20,13 @@ button{
 }
 
 .stats{
-    width: 15em;
+    width: 12em;
+}
+
+.inline{
+    display:inline-block;
+}
+
+.scrollOverflow{
+    overflow: scroll;
 }
