@@ -6,6 +6,10 @@ button{
     width: 11em;
 }
 
+.widerButton{
+    width: 12em;
+}
+
 .table{
     display:table;
     padding-bottom: 0.5em;
@@ -30,4 +34,9 @@ button{
 
 .scrollOverflow{
     overflow-x: scroll;
+}
+
+.resources{
+    width: 23em;
+    padding-right: 1em;
 }

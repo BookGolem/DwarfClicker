@@ -57,9 +57,13 @@ var SMELTINGRESEARCHTARGET = 500;
 var smeltingResearch = 0;
 function smeltingResearchComplete(){
     document.getElementById("researchSteelPicksButton").style.display = '';
-    document.getElementById("buildSmelteryButton").style.display = '';
     document.getElementById("researchAdvSmeltingButton").style.display = '';
     document.getElementById("researchIronVeinsButton").style.display = '';
+    //Smelteries
+    document.getElementById("buildSmelteryButton").style.display = '';
+    document.getElementById("hireMetallurgistButton").style.display = '';
+    document.getElementById("smelteryData").style.display = '';
+    document.getElementById("metallurgistData").style.display = '';
 }
 
 var ADVSMELTINGRESEARCHTARGET = 1000;

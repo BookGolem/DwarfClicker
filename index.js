@@ -240,15 +240,15 @@ function onTimerTick() {
     if(stone >= BASEBURROWCOST){
         document.getElementById("buildBurrowButton").style.display = '';
         if(stone >= BASETRADERCOST){
-            document.getElementById("buildTraderButton").style.display = '';
+            document.getElementById("commerceSector").style.display = '';
             if(stone >= BASEWORKSHOPCOST){
                 document.getElementById("engineeringSector").style.display = '';
-                document.getElementById("buildWorkshopButton").style.display = '';
             }
         }
     }
     if(ore >= BASEMINERCOST){
         document.getElementById("hireMinerButton").style.display = '';
+        document.getElementById("minerData").style.display = '';
     }
     if(dwarfs >= 50){
         document.getElementById("buildBreweryButton").style.display = '';
@@ -365,7 +365,7 @@ function onIncreaseClick(){
 
     if(ore == clickOreValue){
         document.getElementById("oreData").style.display = '';
-    document.getElementById("stoneData").style.display = '';
+        document.getElementById("stoneData").style.display = '';
     }
 }
 
@@ -444,10 +444,6 @@ function onMinerClick(){
     minerCost = Math.round(BASEMINERCOST * Math.pow(MINERMULTIPLIER, numberOfMiners));
     
     document.getElementById("minerCost").innerHTML = parseInt(minerCost);
-
-    if(numberOfMiners == 1){
-        document.getElementById("minerData").style.display = '';
-    }
 }
 
 function onDrillClick(){    
@@ -514,10 +510,6 @@ function onWorkshopClick(){
     document.getElementById("workshopCost").innerHTML = parseInt(workshopCost);
     document.getElementById("numWorkshops").innerHTML = numberOfWorkshops;
     document.getElementById("numEngineers").innerHTML = numberOfEngineers + " / " + maxEngineers;
-
-    if(numberOfWorkshops <= 1){
-        document.getElementById("hireEngineerButton").style.display = '';
-    }
 }
 
 function onShedClick(){
@@ -546,12 +538,6 @@ function onSmelteryClick(){
     document.getElementById("smelteryCost").innerHTML = parseInt(smelteryCost);
     document.getElementById("numSmelteries").innerHTML = numberOfSmelteries;
     document.getElementById("numMetallurgists").innerHTML = numberOfMetallurgists + " / " + maxMetallurgists;
-
-    if(numberOfSmelteries <= 1){
-        document.getElementById("hireMetallurgistButton").style.display = '';
-        document.getElementById("smelteryData").style.display = '';
-        document.getElementById("metallurgistData").style.display = '';
-    }
 }
 
 function onTraderClick(){
@@ -712,35 +698,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     //Hide locked controls and data
     //data
-    document.getElementById("oreData").style.display = 'none';
     document.getElementById("ironData").style.display = 'none';
     document.getElementById("goldData").style.display = 'none';
-    document.getElementById("stoneData").style.display = 'none';
     document.getElementById("coalData").style.display = 'none';
     document.getElementById("researchData").style.display = 'none';
-    document.getElementById("popData").style.display = 'none';
 
     document.getElementById("minerData").style.display = 'none';
     document.getElementById("drillData").style.display = 'none';
     document.getElementById("burrowData").style.display = 'none';
     document.getElementById("shedData").style.display = 'none';
 
-    document.getElementById("merchantData").style.display = 'none';
-
     document.getElementById("engineeringSector").style.display = 'none';
 
     document.getElementById("hireMinerButton").style.display = 'none';
     document.getElementById("hireDrillButton").style.display = 'none';
     document.getElementById("hireMetallurgistButton").style.display = 'none';
+    document.getElementById("smelteryData").style.display = 'none';
+    document.getElementById("metallurgistData").style.display = 'none';
 
     document.getElementById("buildBurrowButton").style.display = 'none';
-    document.getElementById("buildWorkshopButton").style.display = 'none';
     document.getElementById("buildShedButton").style.display = 'none';
     document.getElementById("buildSmelteryButton").style.display = 'none';
-    document.getElementById("buildTraderButton").style.display = 'none';
     document.getElementById("buildBreweryButton").style.display = 'none';
     
-    document.getElementById("hireEngineerButton").style.display = 'none';
     document.getElementById("researchCoalMiningButton").style.display = 'none';
     document.getElementById("researchGoldMiningButton").style.display = 'none';
     document.getElementById("researchSmeltingButton").style.display = 'none';
@@ -752,7 +732,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("researchReinforcedCoalButton").style.display = 'none';
     document.getElementById("researchGoldVeinsButton").style.display = 'none';
 
-    document.getElementById("hireMerchantButton").style.display = 'none';
+    document.getElementById("commerceSector").style.display = 'none';
     document.getElementById("purchaseAleButton").style.display = 'none';
     document.getElementById("sellIronOreButton").style.display = 'none';
     document.getElementById("sellIronBarsButton").style.display = 'none';
