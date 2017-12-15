@@ -26,7 +26,7 @@ var BASEBURROWCOST = 50;
 var BURROWMULTIPLIER = 1.3; //This is huge. Price = price * multiplier each time.
 var BASEWORKSHOPCOST = 1000;
 var WORKSHOPMULTIPLIER = 1.4;
-var BASESHEDCOST = 3000;
+var BASESHEDCOST = 10000;
 var SHEDMULTIPLIER = 1.3;
 var BASESMELTERYCOST = 2000;
 var SMELTERYMULTIPLIER = 1.2;
@@ -143,12 +143,12 @@ var aleCost = 10; //Cost for 100 ale.
 var grainCost = 25; //Cost for 1000 grain. (4 grain = 1 ale)
 var brewsterCost = BASEBREWSTERCOST;
 var numberOfBrewsters = 0;
-var brewingSpeed = 0.1;
+var brewingSpeed = 0.2;
 var grainPerAle = 3; //Base is 4, switched to 3 for an experiment.
 
 var farmerCost = BASEFARMERCOST;
 var numberOfFarmers = 0;
-var farmerGrainProduction = 0.2;
+var farmerGrainProduction = 0.5; //Default 2, was too slow.
 var farmingSpeed = 0;
 
 //Variables - Commerce
@@ -521,12 +521,6 @@ function onShedClick(){
     document.getElementById("shedCost").innerHTML = parseInt(shedCost);
     document.getElementById("numSheds").innerHTML = numberOfSheds;
     document.getElementById("numDrills").innerHTML = numberOfSteamDrills + " / " + maxDrills;
-
-    if(numberOfSheds <= 1){
-        document.getElementById("hireDrillButton").style.display = '';
-        document.getElementById("shedData").style.display = '';
-        document.getElementById("drillData").style.display = '';
-    }
 }
 
 function onSmelteryClick(){

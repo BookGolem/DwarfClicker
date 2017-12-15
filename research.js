@@ -40,6 +40,8 @@ function coalMiningResearchComplete(){
     if(advSmeltingResearch >= ADVSMELTINGRESEARCHTARGET){
         document.getElementById("researchSteamButton").style.display = '';
     }
+
+    document.getElementById("researchCoalMiningButton").style.display = 'none';
 }
 
 var GOLDMININGRESEARCHTARGET = 1000;
@@ -51,6 +53,7 @@ function goldMiningResearchComplete(){
     if(ironVeinsResearch >= IRONVEINSRESEARCHTARGET){
         document.getElementById("researchGoldVeinsButton").style.display = '';
     }
+    document.getElementById("researchGoldMiningButton").style.display = 'none';
 }
 
 var SMELTINGRESEARCHTARGET = 500;
@@ -64,6 +67,8 @@ function smeltingResearchComplete(){
     document.getElementById("hireMetallurgistButton").style.display = '';
     document.getElementById("smelteryData").style.display = '';
     document.getElementById("metallurgistData").style.display = '';
+
+    document.getElementById("researchSmeltingButton").style.display = 'none';
 }
 
 var ADVSMELTINGRESEARCHTARGET = 1000;
@@ -73,6 +78,8 @@ function advSmeltingResearchComplete(){
     if(coalMiningResearch >= COALMININGRESEARCHTARGET){
         document.getElementById("researchSteamButton").style.display = '';
     }
+
+    document.getElementById("researchAdvSmeltingButton").style.display = 'none';
 }
 
 var STEELPICKRESEARCHTARGET = 2000;
@@ -80,6 +87,7 @@ var steelPickResearch = 0;
 function steelPickResearchComplete(){
     minerEfficiencyMultiplier += 0.5;
     calculateIncrements();
+    document.getElementById("researchSteelPicksButton").style.display = 'none';
 }
 
 var STEAMRESEARCHTARGET = 2000;
@@ -87,12 +95,19 @@ var steamResearch = 0;
 function steamResearchComplete(){
     document.getElementById("researchDrillButton").style.display = '';
     //Enable production of convayors and lifts for automated mining too.
+
+    document.getElementById("researchSteamButton").style.display = 'none';
 }
 
 var DRILLRESEARCHTARGET = 4000;
 var drillResearch = 0;
 function drillResearchComplete(){
     document.getElementById("buildShedButton").style.display = '';
+    document.getElementById("hireDrillButton").style.display = '';
+    document.getElementById("shedData").style.display = '';
+    document.getElementById("drillData").style.display = '';
+
+    document.getElementById("researchDrillButton").style.display = 'none';
 }
 
 var IRONVEINSRESEARCHTARGET = 1500;
@@ -103,6 +118,7 @@ function ironVeinsResearchComplete(){
     if(goldMiningResearch >= GOLDMININGRESEARCHTARGET){
         document.getElementById("researchGoldVeinsButton").style.display = '';
     }
+    document.getElementById("researchIronVeinsButton").style.display = 'none';
 }
 
 var REINFORCEDCOALRESEARCHTARGET = 1500;
@@ -110,6 +126,7 @@ var reinforcedCoalResearch = 0;
 function reinforcedCoalResearchComplete(){
     minerCoalSpeed = minerCoalSpeed*1.5
     calculateIncrements();
+    document.getElementById("researchReinforcedCoalButton").style.display = 'none';
 }
 
 var GOLDVEINRESEARCHTARGET = 1500;
@@ -117,4 +134,5 @@ var goldVeinsResearch = 0;
 function goldVeinsResearchComplete(){
     minerGoldSpeed = minerGoldSpeed*1.5
     calculateIncrements();
+    document.getElementById("researchGoldVeinsButton").style.display = 'none';
 }
